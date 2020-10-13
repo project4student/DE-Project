@@ -1,5 +1,6 @@
-
 <?php
+// session_start();
+
 echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <a class="navbar-brand" href="#">RAMC Blood Bank</a>
 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -33,14 +34,22 @@ aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle 
   <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-  </form>
-      <button class="btn btn-danger text-center ml-2" data-toggle="modal" data-target="#loginModal">Login</button>
-      <button class="btn btn-danger text-center ml-2" data-toggle="modal" data-target="#signupModal">Signup</button>
+  </form>';
+
+  if(!isset($_SESSION['login']) || $_SESSION['login'] == false){
+
+    echo '<button class="btn btn-danger text-center ml-2" data-toggle="modal" data-target="#loginModal">Login</button>
+    <button class="btn btn-danger text-center ml-2" data-toggle="modal" data-target="#signupModal">Signup</button>';
+    }
+    else{
+        echo '<a href="_logout.php" class="btn btn-danger text-center ml-2">Logout</a>';
+    }
+echo'
 </div>
 
 </div>
-</nav>
-' ;
+</nav>';
+ 
 include "loginModal.php";
 include "signupModal.php";
 ?>
