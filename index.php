@@ -37,44 +37,51 @@
 </head>
 
 <body>
-    <?php require "nav.php";
+    <?php 
+    require "nav.php";
 
-
-    if(isset($_SESSION['insert']) && $_SESSION['insert']==true){
-    echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+    if(isset($_COOKIE['insert']) && $_COOKIE['insert']==true){
+    echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert" id="success">
         <strong>Successfully!</strong> Data inserted.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>';
     }
-    if(isset($_SESSION['insert']) && $_SESSION['insert']==false){
-        echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
+    if(isset($_COOKIE['insert']) && $_COOKIE['insert']==false){
+        echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert" id="failure">
         <strong>Sorry!</strong> Data not inserted.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
     </div>';
     }
-    unset($_SESSION['insert']);
 
-    if(isset($_SESSION['login']) && $_SESSION['login']==true){
+    if(isset($_COOKIE['insert'])){
+        setcookie('insert','', time() - 3600 );
+    }
+
+    if(isset($_COOKIE['loginstatus']) && $_COOKIE['loginstatus']==1){
         echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
             <strong>Successfully!</strong> login.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-        </div>';
+            </div>';
         }
-        if(isset($_SESSION['login']) && $_SESSION['login']==false){
+        if(isset($_COOKIE['loginstatus']) && $_COOKIE['loginstatus']==0){
             echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert">
             <strong>Sorry!</strong> Login failed.
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+            <span aria-hidden="true">&times;</span>
             </button>
-        </div>';
+            </div>';
         }
-    ?>
+        if(isset($_COOKIE['loginstatus'])){
+            setcookie('loginstatus','', time() - 3600 );
+        }
+        ?>
+
     <!-- carousel -->
     <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -229,7 +236,10 @@
         </div>
     </div>
 
-    <?php include "footer.php"?>
+    <?php 
+        include "footer.php";
+        unset($_COOKIE['loginstatus']);
+    ?>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -242,9 +252,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
-    <script>
-        
-    </script>
+    <!-- <script src="/DE_Proje ct/validation.js"></script> -->
 </body>
 
 </html>
