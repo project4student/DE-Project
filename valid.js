@@ -5,41 +5,34 @@ const mobile = document.getElementById('mobile');
 const password = document.getElementById('password');
 const cpassword = document.getElementById('cpassword');
 const dob = document.getElementById('dob');
-// console.log(dob.value);
-let validEmail = false;
-let validPhone = false;
-let validUser = false;
-// let validage = false;
-let validPassword =false;
-let validCpassword =false;
-// $('#failure').hide();
-// $('#success').hide();
 
-// age.addEventListener('blur',()=>{
-//     let regex=/^([0-9]){1,2}$/;
-//     let str=age.value;
-//     if(regex.test(str) && age.value>=14){
-//         age.classList.remove('is-invalid');
-//         validage = true;
-//     }
-//     else{
-//         age.classList.add('is-invalid');
-//         validage = false;
-        
-//     }
-// })
+dob.addEventListener('blur',()=>{
+    let str= dob.value.split("-");
+    let year=parseInt(str[0]);
+    let month=parseInt(str[1]);
+    let day=parseInt(str[2]);
+    let current=new Date();
+    let b=new Date(year,month-1,day);
+    let age=current.getTime()-b.getTime();
+    year=1000*60*60*24*365; //1 year
+    age=Math.round(age/year);
+    if(age>=18){
+        dob.classList.remove('is-invalid');
+    }
+    else{
+        dob.classList.add('is-invalid');
+    }
+    
+})
 
 name.addEventListener('blur', ()=>{
     let regex = /^([a-zA-Z]){1,30}$/;
     let str = name.value;
     if(regex.test(str)){
         name.classList.remove('is-invalid');
-        validUser = true;
     }
     else{
-        name.classList.add('is-invalid');
-        validUser = false;
-        
+        name.classList.add('is-invalid'); 
     }
 })
 
@@ -48,11 +41,9 @@ email.addEventListener('blur', ()=>{
     let str = email.value;
     if(regex.test(str)){
         email.classList.remove('is-invalid');
-        validEmail = true;
     }
     else{
         email.classList.add('is-invalid');
-        validEmail = false;
     }
 })
 
@@ -62,12 +53,9 @@ mobile.addEventListener('blur', ()=>{
     let str = mobile.value;
     if(regex.test(str)){
         mobile.classList.remove('is-invalid');
-        validPhone = true;
     }
     else{
         mobile.classList.add('is-invalid');
-        validPhone = false;
-        
     }
 })
 
@@ -76,49 +64,30 @@ password.addEventListener('blur', ()=>{
     let str =  password.value;
     if (regex.test(str)) {
         password.classList.remove('is-invalid');
-        validPassword = true;
     }
     else{
         password.classList.add('is-invalid');
-        validPassword = false;
-        
     }
 });
 
 cpassword.addEventListener('blur', ()=>{
     let regex=/^[a-zA-Z0-9!@#$%^&*]{6,16}$/;
     let str =  cpassword.value;
-    if (regex.test(str)) {
-        cpassword.classList.remove('is-invalid');
-        validcpassword = true;
-    }
-    else{
-        cpassword.classList.add('is-invalid');
-        validcpassword = false;
-        
-    }
-});
-cpassword.addEventListener('blur',()=>{
-
-    if(cpassword.value == password.value){
+    if (regex.test(str) && cpassword.value == password.value) {
         cpassword.classList.remove('is-invalid');
     }
     else{
         cpassword.classList.add('is-invalid');
-        validcpassword = false;
-        
     }
 });
 
 let signup=document.getElementById('signup');
 signup.addEventListener('click',(e)=>{
     let invalid=document.getElementsByClassName('is-invalid');
-    console.log(invalid);
+    // console.log(invalid);
     if(invalid.length > 0){
         e.preventDefault();
-        console.log("you can not submit");
-    }else{
-        console.log("you can submit");
+        // console.log("you can not submit");
     }
 });
 

@@ -28,20 +28,16 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             </li>
         </ul>
 
-        <div class=" row mx-2">
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-            </form>';
-            // echo var_dump(isset($_COOKIE['login']));
-            //  echo '<br>'.isset($_COOKIE['login']);
-            if(!isset($_COOKIE['login']) || $_COOKIE['login'] == 0){
-                echo '<a  href="loginModal.php" class="btn btn-danger text-center ml-2">Login</a>
-                <a href="signupModal.php" class="btn btn-danger text-center ml-2">SignUp</a>';
-            }
-            if(isset($_COOKIE['login']) && $_COOKIE['login'] == 1){
-                echo '<a href="_logout.php" class="btn btn-danger text-center ml-2">Logout</a>';
-            }
+        <div class=" row mx-2">';
+        // echo var_dump(isset($_COOKIE['login']));
+        //  echo '<br>'.isset($_COOKIE['login']);
+        if(!isset($_COOKIE['login']) || $_COOKIE['login'] == 0){
+            echo '<a  href="loginModal.php" class="btn btn-danger text-center ml-2">Login</a>
+            <a href="signupModal.php?signup=P" class="btn btn-danger text-center ml-2">SignUp</a>';
+        }
+        if(isset($_COOKIE['login']) && $_COOKIE['login'] == 1){
+            echo '<a href="_logout.php" class="btn btn-danger text-center ml-2">Logout</a>';
+        }
         echo'
         </div>
 

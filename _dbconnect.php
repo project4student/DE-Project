@@ -26,4 +26,10 @@ if(!$result){
     echo "Error:".mysqli_error($conn);
 }
 
+$sql="CREATE TABLE IF NOT EXISTS `bbms`.`user01` ( `Name` VARCHAR(40) NOT NULL , `Email` VARCHAR(20) NOT NULL ,  `Address` VARCHAR(255) NOT NULL ,  `City` TEXT NOT NULL ,  `Telephone No` VARCHAR(12) NOT NULL ,  `Password` VARCHAR(18) NOT NULL,`Time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,  UNIQUE  (`Telephone No`),    UNIQUE  (`Email`)) ENGINE = InnoDB";
+$result=mysqli_query($conn,$sql);
+if(!$result){
+    echo "Error:".mysqli_error($conn);
+}
+
 ?>

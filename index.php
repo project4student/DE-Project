@@ -1,4 +1,7 @@
-<?php session_start();?>
+<?php 
+    session_start();
+    require '_dbconnect.php';
+?>
 <!doctype html>
 <html lang="en">
 
@@ -105,6 +108,28 @@
         </a>
     </div>
 
+    <?php 
+    if(isset($_SESSION['username'])){
+        $str=$_SESSION['username'];
+        $username=explode("@",$str);
+    }
+    
+    if(isset($_COOKIE['login']) && $_COOKIE['login'] == 1){
+        echo '<br><hr style="border: 1px solid black;"><br> 
+        <div class="jumbotron">
+        <h1 class="display-4">Hello, '.$username[0].'!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
+            featured content or information.</p>
+        <hr class="my-4">
+        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+        </div>
+        <br><hr style="border: 1px solid black;"><br>';
+    }
+    ?>
+    
+    
+
     <!-- add content  -->
     <div class="container my-3">
         <h2 class="text-center" style="color: red;">RAMC SERVICES</h2>
@@ -119,7 +144,7 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's
                             content.</p>
-                        <a href="#" class="btn btn-danger text-center">Register Now</a>
+                        <a href="schedule.php" class="btn btn-danger text-center">Check Schedule</a>
                     </div>
                 </div>
             </div>
@@ -145,7 +170,7 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's
                             content.</p>
-                        <a href="#" class="btn btn-danger text-center">Check It</a>
+                        <a href="bloodAvailability.php" class="btn btn-danger text-center">Check It</a>
                     </div>
                 </div>
             </div>
