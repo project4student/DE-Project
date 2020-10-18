@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require '_dbconnect.php';
     $t=1;
     $f=0;
@@ -8,6 +9,7 @@
         $sql="SELECT * FROM `user02` WHERE Email ='$email' AND Password='$password'";
         $result=mysqli_query($conn,$sql);
         if(mysqli_num_rows($result)>0){
+            $_SESSION['username']=$email;
             setcookie('loginstatus',$t,time() + 3600);
             setcookie('login',$t,time() + 3600);
             // echo "inside if ".$_COOKIE['loginstatus']."<br>";
@@ -17,7 +19,7 @@
             setcookie('login',$f,time() + 3600);
             // echo "inside else ".$_COOKIE['loginstatus']."<br>";
         }
-        header("location:/DE_Project/index.php");
+        header("location:/DE-Project-main/index.php");
     }
 
     ?>
@@ -37,7 +39,7 @@
 </head>
 
 <body>
-    <?php require 'nav.php'?>
+    <?php require 'nav.php';?>
 
     <!-- Modal -->
     <!-- <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">

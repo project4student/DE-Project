@@ -4,5 +4,5 @@
     session_unset();
     session_destroy();
 
-    header("location:/DE_Project/index.php");
+    header("location:/DE-Project-main/index.php");
 ?>
