@@ -1,3 +1,5 @@
-<div class="container-fluid bg-dark text-light md-0">
-    <span class="text-center" style="text-align:center; margin:auto width:100%">Copyright RAMC Blood Bank 2021 | All rights reserved</span>
+<div class="container-fluid bg-dark text-light md-0 py-3 text-center">
+    <p class="mb-0">If any query regarding above Information than contact us on </p>
+    <p class="mb-0">online.blood.bank@gmail.com</p><br>
+    <p class="mb-0" >Copyright Online Blood Bank 2021 | All rights reserved</p>
 </div>

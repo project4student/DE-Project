@@ -1,6 +1,11 @@
 <?php
+	session_start();
 	if(!isset($_COOKIE['login']) || $_COOKIE['login'] == 0){
-		header("location:/DE-Project-main/loginModal.php");
+		header("location:login.php");
+	}
+	require '_dbconnect.php';
+	if(isset($_SESSION['user'])){
+		$id=$_SESSION['user'][0];
 	}
 ?>
 <!doctype html>
@@ -23,27 +28,44 @@
 
 <body>
 	<?php require 'nav.php'; ?>
-	<div class="container my-3">
+	<div class="container my-3" style="height:69vh;">
 
 
 		<h2>Blood Availability in all the blood banks</h2>
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>S.no.</th>
+
 					<th>Blood Bank</th>
-					<th>Category</th>
-					<th>Availability</th>
+
+					<th>A+</th>
+					<th>A-</th>
+					<th>B+</th>
+					<th>B-</th>
+					<th>AB+</th>
+					<th>AB-</th>
+					<th>O+</th>
+					<th>O-</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- Aa badho data database mathi retrive thase -->
-				<tr>
-					<td>1</td>
-					<td>Saradarnagar Blood Bank</td>
-					<td>Private</td>
-					<td>Available, B-Ve:5, A+Ve:30, O-Ve:3, O+Ve:29, AB-Ve:3, B+Ve:45, AB+Ve:18</td>
-				</tr>
+				<?php
+				$sql= "SELECT * FROM `bloodavailability`";
+				$result=mysqli_query($conn,$sql);
+				while($row=mysqli_fetch_array($result)) {
+					echo "<tr>
+						<td>".$row[0]."</td>
+						<td>".$row[1]."</td>
+						<td>".$row[2]."</td>
+						<td>".$row[3]."</td>
+						<td>".$row[4]."</td>
+						<td>".$row[5]."</td>
+						<td>".$row[6]."</td>
+						<td>".$row[7]."</td>
+						<td>".$row[8]."</td>
+					</tr>";
+				}
+				?>
 			</tbody>
 		</table>
 

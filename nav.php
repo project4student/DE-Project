@@ -16,24 +16,38 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                     Services
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="shedule.php">Blood Donation Camp Schedule</a>
+                </a>';
+                if(isset($_SESSION['user']) && $_SESSION['user'] == "HB"){
+                    echo'
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="organizeCamp.php" id="camp"> Organize Blood Donation Camp</a>
+                    <a class="dropdown-item" href="updatebloodavailability.php">Update Blood Availability</a>
+                    </div>';}
+                else{
+                    echo'
+                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="schedule.php">Blood Donation Camp Schedule</a>
                     <a class="dropdown-item" href="bloodbank.php">Blood Banks</a>
                     <a class="dropdown-item" href="bloodAvailability.php">Blood Availability</a>
-                </div>
-            </li>
+                    </div>';
+                }
+            echo'</li>';
+            if(isset($_SESSION['user']) && $_SESSION['user'] == "public"){
+                echo '<li class="nav-item">
+                <a class="nav-link" href="donation.php">Your Donation</a>
+                </li>';
+            }
+            echo'
             <li class="nav-item">
-                <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">About Us</a>
+                <a class="nav-link" href="about.php">About Us</a>
             </li>
         </ul>
 
         <div class=" row mx-2">';
-        // echo var_dump(isset($_COOKIE['login']));
-        //  echo '<br>'.isset($_COOKIE['login']);
+        
         if(!isset($_COOKIE['login']) || $_COOKIE['login'] == 0){
-            echo '<a  href="loginModal.php" class="btn btn-danger text-center ml-2">Login</a>
-            <a href="signupModal.php?signup=P" class="btn btn-danger text-center ml-2">SignUp</a>';
+            echo '<a  href="login.php" class="btn btn-danger text-center ml-2">Login</a>
+            <a href="signup.php?signup=P" class="btn btn-danger text-center ml-2">SignUp</a>';
         }
         if(isset($_COOKIE['login']) && $_COOKIE['login'] == 1){
             echo '<a href="_logout.php" class="btn btn-danger text-center ml-2">Logout</a>';
@@ -43,7 +57,5 @@ echo '<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
     </div>
 </nav>';
- 
-// require "loginModal.php";
-// include "signupModal.php";
-?>
+
+?> 

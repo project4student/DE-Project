@@ -1,3 +1,7 @@
+<?php
+	session_start();
+	require '_dbconnect.php';
+?>
 <!doctype html>
 <html lang="en">
 
@@ -17,32 +21,41 @@
 
 <body>
 	<?php require 'nav.php'; ?>
-	<div class="container my-3">
+	<div class="container my-3" style="height:69vh;">
 
-		<h2>Future Blood Camp</h2>
+		<h2>Future Blood Donation Camp</h2>
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>S.no.</th>
+					<!-- <th>S.no.</th> -->
+					<th>Email</th>
+					<th>Primary_number</th>
+					<th>Secondary_Number</th>
 					<th>Date</th>
 					<th>Time</th>
-					<th>Camp Name</th>
 					<th>Address</th>
-					<th>Contact</th>
-					<th>Organized by</th>
+					<th>City</th>
+					<th>Apply</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- aa badho data database mathi retrive karvano -->
-				<tr>
-					<td>1</td>
-					<td>20 Oct. 2020</td>
-					<td>10:00 AM to 02:00 PM</td>
-					<td>Gurukul Ayojit Blood Camp</td>
-					<td>opposite Sardarnagar circle, Bhavnagar</td>
-					<td>111111111</td>
-					<td>K.P.Swami</td>
-				</tr>
+				<?php
+				$sql= "SELECT * FROM `camp`";
+				$result=mysqli_query($conn,$sql);
+				while($row=mysqli_fetch_array($result)) {
+					$id = explode('@',$row[1])[0];
+					echo "<tr>
+					<td>".$row[1]."</td>
+					<td>".$row[2]."</td>
+					<td>".$row[3]."</td>
+					<td>".$row[4]."</td>
+					<td>".$row[5]."</td>
+					<td>".$row[6]."</td>
+					<td>".$row[7]."</td>
+						<td><a href='apply.php?id=";echo $id."'>Apply Now</a></td>
+					</tr>";
+				}
+				?>
 			</tbody>
 		</table>
 	</div>

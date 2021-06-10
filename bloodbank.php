@@ -1,3 +1,5 @@
+<?php session_start();
+ require '_dbconnect.php'; ?>
 <!doctype html>
 <html lang="en">
 
@@ -21,25 +23,29 @@
 		<table id="myTable">
 			<thead>
 				<tr>
-					<th>S.no.</th>
 					<th>Name</th>
 					<th>Address</th>
+					<th>City</th>
 					<th>Contact</th>
 					<th>Email</th>
 					<th>category</th>
 				</tr>
 			</thead>
 			<tbody>
-				<!-- aa badho data database mathi retrive karvano -->
-				<tr>
-					<td>1</td>
-					<td>Sardarnagar blood bank</td>
-					<td>opposite Sardarnagar circle, Bhavnagar</td>
-					<td>111111111</td>
-					<td>mybloodbank@gmail.com</td>
-					<td>Private</td>
-					
-				</tr>
+			<?php
+				$sql="SELECT * FROM `user01`";
+				$result=mysqli_query($conn,$sql);
+				while($row=mysqli_fetch_array($result)) {
+					echo "<tr>
+						<td>".$row[1]."</td>
+						<td>".$row[4]."</td>
+						<td>".$row[5]."</td>
+						<td>".$row[6]."</td>
+						<td>".$row[2]."</td>
+						<td>".$row[3]."</td>
+					</tr>";
+				}
+			?>
 			</tbody>
 		</table>
 	</div>

@@ -22,7 +22,6 @@
         border-collapse: collapse;
         text-align: center;
         width: 100%;
-
         margin-left: 12px;
     }
 
@@ -42,10 +41,19 @@
 <body>
     <?php 
     require "nav.php";
+    
+    if(isset($_COOKIE['login']) && $_COOKIE['login'] == 1 && isset($_SESSION['username'])){
+        echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert">
+        <strong>Hello '.$_SESSION['username'][0].'</strong>.  Welcome to our Website
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        </div>';
+    }
 
     if(isset($_COOKIE['insert']) && $_COOKIE['insert']==true){
     echo '<div class="alert alert-success alert-dismissible fade show mb-0" role="alert" id="success">
-        <strong>Successfully!</strong> Data inserted.
+        <strong>Successfully!</strong> Signup Now try to Login.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -53,7 +61,7 @@
     }
     if(isset($_COOKIE['insert']) && $_COOKIE['insert']==false){
         echo '<div class="alert alert-danger alert-dismissible fade show mb-0" role="alert" id="failure">
-        <strong>Sorry!</strong> Data not inserted.
+        <strong>Sorry!</strong> Signup failed.
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
@@ -107,26 +115,6 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
-
-    <?php 
-    if(isset($_SESSION['username'])){
-        $str=$_SESSION['username'];
-        $username=explode("@",$str);
-    }
-    
-    if(isset($_COOKIE['login']) && $_COOKIE['login'] == 1){
-        echo '<br><hr style="border: 1px solid black;"><br> 
-        <div class="jumbotron">
-        <h1 class="display-4">Hello, '.$username[0].'!</h1>
-        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to
-            featured content or information.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
-        </div>
-        <br><hr style="border: 1px solid black;"><br>';
-    }
-    ?>
     
     
 
@@ -157,7 +145,7 @@
                         <p class="card-text">Some quick example text to build on the card title and make up the bulk of
                             the card's
                             content.</p>
-                        <a href="#" class="btn btn-danger text-center">Donate Now</a>
+                        <a class="btn btn-danger text-center" id="donate">Donate Now</a>
                     </div>
                 </div>
             </div>
@@ -179,7 +167,7 @@
     <hr style="border: 1px solid black;">
 
     <!-- Blood Bank info -->
-    <div class="container my-3">
+    <div class="container my-3 py-4">
         <h2 class="text-center" style="color: red;">ABOUT DONATION</h2>
         <hr style="border: 2px solid red; width: 10%;">
         <div class="media">
@@ -235,13 +223,15 @@
                 </table>
             </div>
         </div>
-        <button type="button" class="btn btn-danger mt-0" style="margin-left: 200px;">Donate Now</button>
     </div>
 
-    <hr style="border: 1px solid black;">
+    <div class="text-center my-2">
+        
+        <a href="contact.php" class="text-center btn btn-danger">Contact Us</a>
+    </div>
 
     <!-- Criteria to donate blood  -->
-    <div class="jumbotron">
+    <div class="jumbotron mb-0 py-5">
         <h1 class="display-5 text-center" style="font-weight: bold; color: red;">CRITERIA TO DONATE BLOOD</h1>
         <hr style="border: 2px solid red; width: 10%;">
         <p class="lead my-3">
@@ -254,15 +244,10 @@
             <b>6. Body temperature</b>- Should be normal, with an oral temperature not exceeding 37.5 °C. <br>
             <b>7. The time period between successive blood donations should be more than 3 months.</b> <br>
         </p>
-        <hr class="my-4">
-        <p class="text-center">If any query regarding above Information than contact us by click following button.</p>
-        <div class="text-center">
-            <a class="btn btn-danger btn-lg text-center" href="#" role="button">Contact Us</a>
-        </div>
     </div>
 
     <?php 
-        include "footer.php";
+        require "footer.php";
         unset($_COOKIE['loginstatus']);
     ?>
 
@@ -277,7 +262,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous">
     </script>
-    <!-- <script src="/DE-Project-main/validation.js"></script> -->
+    <script>
+        let donate=document.getElementById('donate');
+        donate.addEventListener('click',()=>{
+            alert("Sorry! For some reason this functionality is not available right now.")
+        })
+    </script>
 </body>
 
 </html>
